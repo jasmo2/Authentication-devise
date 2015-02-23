@@ -7,34 +7,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div class="ui two column middle aligned relaxed fitted stackable grid">
-	  <div class="column">
-	    <div class="ui form segment">
-	      <div class="field">
-	        <label>Username</label>
-	        <div class="ui left icon input">
-	          <input type="text" placeholder="Username">
-	          <i class="user icon"></i>
-	        </div>
-	      </div>
-	      <div class="field">
-	        <label>Password</label>
-	        <div class="ui left icon input">
-	          <input type="password">
-	          <i class="lock icon"></i>
-	        </div>
-	      </div>
-	      <div class="ui blue submit button">Login</div>
-	    </div>
-	  </div>
-	  
-	  <div class="center aligned column">
-	    <div class="huge green ui labeled icon button">
-	      <i class="signup icon"></i>
-	      Sign Up
-	    </div>
-	  </div>
-	</div>
+	<nav class="ui fixed menu inverted navbar">
+	<a href="" class="brand item">The authentication</a>
+		<% if user_signed_in? %>
+			<a class="active item">Signed in as <%= current_user.email %>. Not you?</a>
+		  
+		   <%= link_to "Sign out", destroy_user_session_path, :method => :delete, class: "item left" %>
+		 <% else %>
+		   <%= link_to "Sign up", new_user_registration_path ,class: "active item"%> or <%= link_to "sign in", new_user_session_path,  class: "item" %>
+		 <% end %>
+	</nav>
+	<br>
 <%= yield %>
 
 </body>
